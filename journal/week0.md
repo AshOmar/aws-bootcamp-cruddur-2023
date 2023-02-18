@@ -35,7 +35,28 @@ Lucid chart out of free shapes while preparing my Logical and Conceptual designs
 ![Lucid OutofFreeShapes](/_docs/assets/Lucid_Out_of_Free_Shapes.png "Lucid Out of Free Shapes")
 
 ### Install AWS CLI
+AWS CLI installed successfully and added as a gitpod tasks as shown below:
+
+![gitpod AWS CLI](/_docs/assets/AWS-CLI.png "AWS CLI using gitpod tasks")
 
 ### Create a Billing Alarm
 
+Billing Alarm created successfully using CLI as in below screenshot:
+
+![Create Alarm](/_docs/assets/Alarm.png)
+
 ### Create a Budget
+
+Billing Alarm created successfully using CLI as in below screenshot:
+
+![Create Budget](/_docs/assets/Budget.png)
+
+### gitpod commit issue
+
+Faced an issue while trying to commit changes using gitpod and that was because of email privacy restriction 
+
+![](/_docs/assets/git-push-issue.png)
+
+After some analysis I found that the issue was because my email address was private in git hub as below:
+
+![](/_docs/assets/Private-email.png)
