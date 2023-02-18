@@ -11,7 +11,7 @@ Below you can find my **"Not Completed"** conceptual diagram using Lucidchart:
 **Note:** below image has a link to my Lucidchart Conceptual Diagram.
 
 
-[![Lucidchart Conceptual Diagram](/_docs/assets/Conceptual_Design_Lucid.png "Conceptual Design using Lucidchart)](https://lucid.app/lucidchart/5ca8846d-9da1-4871-b714-3cff45425aa9/edit?viewport_loc=-11%2C69%2C1899%2C959%2CEizxkmoz_qBx&invitationId=inv_432bcf22-5c09-4da4-8237-5781969dea0c)
+[![Lucidchart Conceptual Diagram](/_docs/assets/Conceptual_Design_Lucid.png "Conceptual Design using Lucidchart")](https://lucid.app/lucidchart/5ca8846d-9da1-4871-b714-3cff45425aa9/edit?viewport_loc=-11%2C69%2C1899%2C959%2CEizxkmoz_qBx&invitationId=inv_432bcf22-5c09-4da4-8237-5781969dea0c)
 
 
 I've decided to complete the conceptual design using my IPAD as a Napkin as below:
