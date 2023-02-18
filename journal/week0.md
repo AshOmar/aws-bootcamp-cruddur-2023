@@ -4,7 +4,7 @@
 
 ### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
 
-Started to create my conceptual diagram using Lucidchart but unfortunatelly got "Out of Free Shapes" message as shown under [`Lucid Challenge Section`](#lucid-challenge). 
+Started to create my conceptual diagram using Lucidchart but unfortunatelly got "Out of Free Shapes" message as shown under [`Lucid Challenge Section`](#lucidchart-challenge). 
 
 Below you can find my **"Not Completed"** conceptual diagram using Lucidchart: 
 
@@ -29,10 +29,10 @@ Below is an image of my logical diagram with a link to my Lucidchart:
 
 [![Logical Design](/_docs/assets/Logical_Design_Lucid.png "Logical Design")](https://lucid.app/lucidchart/5ca8846d-9da1-4871-b714-3cff45425aa9/edit?viewport_loc=119%2C-63%2C1899%2C959%2C0_0&invitationId=inv_432bcf22-5c09-4da4-8237-5781969dea0c)
 
-#### Lucid Challenge
+#### Lucidchart Challenge
 Lucid chart out of free shapes while preparing my Logical and Conceptual designs as shown in below message:
 
-![Napkin Design](/_docs/assets/Lucid_Out_of_Free_Shapes.png)
+![Lucid OutofFreeShapes](/_docs/assets/Lucid_Out_of_Free_Shapes.png "Lucid Out of Free Shapes")
 
 ### Install AWS CLI
 
