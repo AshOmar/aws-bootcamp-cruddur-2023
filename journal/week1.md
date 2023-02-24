@@ -27,7 +27,46 @@ And also got the JSON back when I tried to use /api/message_groups
 
 #### Add Dockerfile
 
+Added Dockerfile with comments explaining each line
+
+![](/_docs/assets/Week1/Add-Docker-File.png)
+
+#### Build Container using docker build command
+
+![](/_docs/assets/Week1/Docker-build.png)
+
+#### Run Container using docker run with -e option to provide all needed Env Vars
+
+![](/_docs/assets/Week1/Docker-run.png)
+
+#### Container ID
+
 Docker assigns a unique ID to each container. The full container ID is a hexadecimal string of 64 characters. However, in most cases, the short version of this container ID is sufficient. The short container ID represents the first 12 characters of the full container ID.
 
-#### Build Container
-#### Run Container
+Get long and short container IDs using docker ps --no-trunc (default behaviour is to trunc) and also getting Container Images
+
+![](/_docs/assets/Week1/Container-Short-Long-IDs.png)
+
+Return container ID as Env Vars 
+
+![](/_docs/assets/Week1/Get-container-id.png)
+
+#### cURL GET request
+
+Send cURL /api/activites/home to test the server
+
+![](/_docs/assets/Week1/Curl-api-activities-home.png)
+
+Send cURL /api/message_groups to test the server
+
+![](/_docs/assets/Week1/Curl-api-message_groups.png)
+
+#### Check Container Logs
+
+![](/_docs/assets/Week1/Container-logs.png)
+
+#### Stop Container
+
+![](/_docs/assets/Week1/Docker-stop.png)
+
+
