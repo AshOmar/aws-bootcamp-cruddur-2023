@@ -61,6 +61,10 @@ Send cURL /api/message_groups to test the server
 
 ![](/_docs/assets/Week1/Curl-api-message_groups.png)
 
+#### Gain Access to a Container
+
+![](/_docs/assets/Week1/attach-shell.png)
+
 #### Check Container Logs
 
 ![](/_docs/assets/Week1/Container-logs.png)
@@ -69,4 +73,6 @@ Send cURL /api/message_groups to test the server
 
 ![](/_docs/assets/Week1/Docker-stop.png)
 
+#### Delete Image
 
+![](/_docs/assets/Week1/docker-image-rm.png)
