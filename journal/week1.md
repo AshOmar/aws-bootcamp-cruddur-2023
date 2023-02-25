@@ -76,3 +76,75 @@ Send cURL /api/message_groups to test the server
 #### Delete Image
 
 ![](/_docs/assets/Week1/docker-image-rm.png)
+
+### Containerize Frontend
+
+#### Run NPM Install
+
+![](/_docs/assets/Week1/frontend/npm-install.png)
+
+### Build Container
+
+![](/_docs/assets/Week1/frontend/frontend-docker-build.png)
+
+### Run Container
+
+![](/_docs/assets/Week1/frontend/frontend-docker-run.png)
+
+### Understand GitPod Env Vars and how to use them to generate URL
+
+![](/_docs/assets/Week1/frontend/Using-GITPOD-EnvVars-to-generate-URL.png)
+
+### Docker compose up
+
+![](/_docs/assets/Week1/frontend/docker-compose-up.png)
+
+### Frontend & Backend Talking to each other
+
+![](/_docs/assets/Week1/frontend/backend-frontend-talking.png)
+
+### Change to Cloud is very fun
+
+![](/_docs/assets/Week1/frontend/cloud-is-very-fun.png)
+
+### Create dynamodb Table
+
+![](/_docs/assets/Week1/frontend/create-dynamodb-table.png)
+
+### Insert and list to/from dynamodb table
+
+![](/_docs/assets/Week1/frontend/insert-and-list-dynamodb.png)
+
+### Add Postgres Client through GitPod init
+
+![](/_docs/assets/Week1/frontend/add-postgress-client.png)
+
+### Postgres connection using VSCode
+
+![](/_docs/assets/Week1/frontend/postgres-connection-vscode.png)
+
+### Use PSQL with --host option
+
+![](/_docs/assets/Week1/frontend/using-psql-terminal.png)
+
+### Document the Notification Endpoint for the OpenAI Document
+
+![](/_docs/assets/Week1/frontend/add-notification-openapi.png)
+
+### Write a Flask Backend Endpoint for Notifications
+
+I got below error because I forget to import notifications_activities
+
+![](/_docs/assets/Week1/frontend/NotificationsActivities-is-not-defined.png)
+
+Imported notifications_activities
+
+![](/_docs/assets/Week1/frontend/import-notifications-activities.png)
+
+### Write a React Page for Notifications
+
+![](/_docs/assets/Week1/frontend/add-notifications-frontend.png)
+
+### Notifications Page
+
+![](/_docs/assets/Week1/frontend/notifications-frontend.png)
