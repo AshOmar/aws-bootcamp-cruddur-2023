@@ -15,11 +15,11 @@ from services.show_activity import *
 from services.notifications_activities import *
 
 #XRay ----------------------------------------------------------------
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+###from aws_xray_sdk.core import xray_recorder
+###from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
-xray_url = os.getenv("AWS_XRAY_URL")
-xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+###xray_url = os.getenv("AWS_XRAY_URL")
+###xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 #---------------------------------------------------------------------
 
 #HoneyComb --------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ RequestsInstrumentor().instrument()
 #----------------------------------------------------
 
 #XRay -------------------------------
-XRayMiddleware(app, xray_recorder)
+###XRayMiddleware(app, xray_recorder)
 # -----------------------------------
 
 frontend = os.getenv('FRONTEND_URL')
@@ -108,7 +108,7 @@ def data_notification():
   return data, 200
 
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
-@xray_recorder.capture("user_activities")
+###@xray_recorder.capture("user_activities") #XRay --------------------------------
 def data_handle(handle):
   model = UserActivities.run(handle)
   if model['errors'] is not None:
