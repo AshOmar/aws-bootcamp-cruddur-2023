@@ -14,7 +14,7 @@ from services.create_message import *
 from services.show_activity import *
 from services.notifications_activities import *
 
-########## HoneyComb #########
+#HoneyComb --------------------------------------------------------------------------------
 # app.py updates
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -29,18 +29,15 @@ processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
-########## HoneyComb #########
-
-
-
+#-------------------------------------------------------------------------------------------
 
 app = Flask(__name__)
 
-########## HoneyComb #########
+#HoneyComb ------------------------------------------
 # Initialize automatic instrumentation with Flask
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
-########## HoneyComb #########
+#----------------------------------------------------
 
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')

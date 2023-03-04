@@ -1,17 +1,22 @@
 from datetime import datetime, timedelta, timezone
+#HoneyComb ----------------------
 from opentelemetry import trace
+# -------------------------------
 
-#HoneyComb
+#HoneyComb -----------------------------------
 tracer = trace.get_tracer("home.activities")
+# --------------------------------------------
+
 class HomeActivities:
   def run():
-    #HoneyComb
+    #HoneyComb -----------------------------------------------------
     with tracer.start_as_current_span("home-activities-moc-data"):
-      #HoneyComb
       span = trace.get_current_span()
+    # --------------------------------------------------------------
       now = datetime.now(timezone.utc).astimezone()
-      #HoneyComb
+      #HoneyComb -----------------------------------
       span.set_attribute("app.now",now.isoformat())
+      # --------------------------------------------
       results = [{
         'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
         'handle':  'Andrew Brown',
@@ -51,6 +56,7 @@ class HomeActivities:
         'replies': []
       }
       ]
-      #HoneyComb
+      #HoneyComb ------------------------------------------
       span.set_attribute("app.result.length",len(results))
+      #----------------------------------------------------
       return results

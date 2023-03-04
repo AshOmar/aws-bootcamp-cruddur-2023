@@ -1,14 +1,17 @@
 from datetime import datetime, timedelta, timezone
-#HoneyComb
+#HoneyComb ----------------------
 from opentelemetry import trace
+# -------------------------------
 
-#HoneComb
+#HoneComb ---------------------------------------------
 tracer = trace.get_tracer("notifications.activities")
+# -----------------------------------------------------
 
 class NotificationsActivities:
   def run():
-    #HoneyComb
+    #HoneyComb -------------------------------------------------------------
     with tracer.start_as_current_span("notifications-activities-moc-data"):
+    # ----------------------------------------------------------------------
       now = datetime.now(timezone.utc).astimezone()
       results = [{
         'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
