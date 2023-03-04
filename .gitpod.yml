@@ -15,16 +15,20 @@ tasks:
       echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
+  - name: frontend-react-js
+    init: |
+      cd frontend-react-js
+      npm i
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
     - cweijan.vscode-postgresql-client2
 ports:
-  - name: frontend
+  - name: frontend-react-js
     port: 3000
-    onOpen: open-browser
+    #onOpen: open-browser
     visibility: public
-  - name: backend
+  - name: backend-flask
     port: 4567
     visibility: public
   - name: xray-daemon
