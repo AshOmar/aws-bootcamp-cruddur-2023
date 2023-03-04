@@ -14,6 +14,14 @@ from services.create_message import *
 from services.show_activity import *
 from services.notifications_activities import *
 
+#XRay ----------------------------------------------------------------
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+#---------------------------------------------------------------------
+
 #HoneyComb --------------------------------------------------------------------------------
 # app.py updates
 from opentelemetry import trace
@@ -38,6 +46,10 @@ app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 #----------------------------------------------------
+
+#XRay -------------------------------
+XRayMiddleware(app, xray_recorder)
+# -----------------------------------
 
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
