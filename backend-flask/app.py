@@ -151,11 +151,15 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
-  # CloudWatch --------------------------------
+  #CloudWatch --------------------------------
   # Passing logger to HomeActivities 
   ###data = HomeActivities.run(logger = LOGGER)
   data = HomeActivities.run()
   # -------------------------------------------
+
+  #Rollbar -------------------------------------------
+  rollbar.report_message('HomeActivities return', 'info')
+  # --------------------------------------------------
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
@@ -168,8 +172,14 @@ def data_notification():
 def data_handle(handle):
   model = UserActivities.run(handle)
   if model['errors'] is not None:
+    #Rollbar -----------------------------------------------
+    rollbar.report_message('UserActivities Error', 'error')
+    # ------------------------------------------------------
     return model['errors'], 422
   else:
+    #Rollbar -----------------------------------------------
+    rollbar.report_message('UserActivities return', 'info')
+    # ------------------------------------------------------
     return model['data'], 200
 
 @app.route("/api/activities/search", methods=['GET'])
