@@ -22,6 +22,10 @@ services:
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       # -------------------------------------------------
       
+      #Rollbar ---------------------------------------
+      ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
+      # ----------------------------------------------
+
     build: ./backend-flask
     ports:
       - "4567:4567"
