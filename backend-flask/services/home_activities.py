@@ -10,11 +10,11 @@ tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
   #CloudWatch ---------
-  def run(logger): #CloudWatch getting logger parameter in run function
+  ###def run(logger): #CloudWatch getting logger parameter in run function
   # -------------------
-  ###def run(logger):
+  def run():
     #CloudWatch -----------------------------
-    logger.info("Home.Activities")
+    ###logger.info("Home.Activities")
     # ---------------------------------------
 
     #HoneyComb -----------------------------------------------------
