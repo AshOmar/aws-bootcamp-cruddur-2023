@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+
 #HoneyComb ----------------------
 from opentelemetry import trace
 # -------------------------------
@@ -8,7 +9,14 @@ tracer = trace.get_tracer("home.activities")
 # --------------------------------------------
 
 class HomeActivities:
-  def run():
+  #CloudWatch ---------
+  def run(logger): #CloudWatch getting logger parameter in run function
+  # -------------------
+  ###def run(logger):
+    #CloudWatch -----------------------------
+    logger.info("Home.Activities")
+    # ---------------------------------------
+
     #HoneyComb -----------------------------------------------------
     with tracer.start_as_current_span("home-activities-moc-data"):
       span = trace.get_current_span()

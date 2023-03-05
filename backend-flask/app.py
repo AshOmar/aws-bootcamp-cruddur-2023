@@ -22,6 +22,13 @@ from services.notifications_activities import *
 ###xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 #---------------------------------------------------------------------
 
+#CloudWatch ---------------
+import watchtower
+import logging
+from time import strftime
+# -------------------------
+
+
 #HoneyComb --------------------------------------------------------------------------------
 # app.py updates
 from opentelemetry import trace
@@ -50,6 +57,18 @@ RequestsInstrumentor().instrument()
 #XRay -------------------------------
 ###XRayMiddleware(app, xray_recorder)
 # -----------------------------------
+
+#CloudWatch ----------------------------------------------
+
+# Configuring Logger to Use CloudWatch
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
+console_handler = logging.StreamHandler()
+cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+LOGGER.addHandler(console_handler)
+LOGGER.addHandler(cw_handler)
+LOGGER.info("App.py")
+# --------------------------------------------------------
 
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
@@ -99,7 +118,11 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
-  data = HomeActivities.run()
+  # CloudWatch --------------------------------
+  # Passing logger to HomeActivities 
+  data = HomeActivities.run(logger = LOGGER)
+  ###data = HomeActivities.run()
+  # -------------------------------------------
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
@@ -156,5 +179,12 @@ def data_activities_reply(activity_uuid):
     return model['data'], 200
   return
 
+#CloudWatch -----------------------------------------------------------------------------------------------------------------------------------
+@app.after_request
+def after_request(response):
+    timestamp = strftime('[%Y-%b-%d %H:%M]')
+    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+    return response
+# ---------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
   app.run(debug=True)
