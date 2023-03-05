@@ -15,9 +15,9 @@ from services.show_activity import *
 from services.notifications_activities import *
 
 #Rollbar ---------------------------------
-import rollbar
-import rollbar.contrib.flask
-from flask import got_request_exception
+###import rollbar
+###import rollbar.contrib.flask
+###from flask import got_request_exception
 # ----------------------------------------
 
 #XRay ----------------------------------------------------------------
@@ -65,7 +65,6 @@ RequestsInstrumentor().instrument()
 # -----------------------------------
 
 #CloudWatch ----------------------------------------------
-
 # Configuring Logger to Use CloudWatch
 ###LOGGER = logging.getLogger(__name__)
 ###LOGGER.setLevel(logging.DEBUG)
@@ -88,30 +87,30 @@ cors = CORS(
 )
 
 #Rollbar -----------------------------------------------------------------------
-rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
-@app.before_first_request
-def init_rollbar():
-    """init rollbar module"""
-    rollbar.init(
+###rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
+###@app.before_first_request
+###def init_rollbar():
+    ###"""init rollbar module"""
+    ###rollbar.init(
         # access token
-        rollbar_access_token,
+        ###rollbar_access_token,
         # environment name
-        'production',
+        ###'production',
         # server root directory, makes tracebacks prettier
-        root=os.path.dirname(os.path.realpath(__file__)),
+        ###root=os.path.dirname(os.path.realpath(__file__)),
         # flask already sets up logging
-        allow_logging_basic_config=False)
+        ###allow_logging_basic_config=False)
 
     # send exceptions from `app` to rollbar, using flask's signal system.
-    got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+    ###got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 # -------------------------------------------------------------------------------
 
 #Rollbar -----------------------------------------------
 # Adding /rollbar/test end point to test
-@app.route('/rollbar/test')
-def rollbar_test():
-    rollbar.report_message('Hello World!', 'warning')
-    return "Hello World!"
+###@app.route('/rollbar/test')
+###def rollbar_test():
+    ###rollbar.report_message('Hello World!', 'warning')
+    ###return "Hello World!"
 # ------------------------------------------------------
 
 @app.route("/api/message_groups", methods=['GET'])
@@ -158,7 +157,7 @@ def data_home():
   # -------------------------------------------
 
   #Rollbar -------------------------------------------
-  rollbar.report_message('HomeActivities return', 'info')
+  ###rollbar.report_message('HomeActivities return', 'info')
   # --------------------------------------------------
   return data, 200
 
@@ -173,12 +172,12 @@ def data_handle(handle):
   model = UserActivities.run(handle)
   if model['errors'] is not None:
     #Rollbar -----------------------------------------------
-    rollbar.report_message('UserActivities Error', 'error')
+    ###rollbar.report_message('UserActivities Error', 'error')
     # ------------------------------------------------------
     return model['errors'], 422
   else:
     #Rollbar -----------------------------------------------
-    rollbar.report_message('UserActivities return', 'info')
+    ###rollbar.report_message('UserActivities return', 'info')
     # ------------------------------------------------------
     return model['data'], 200
 
