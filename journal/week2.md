@@ -156,7 +156,7 @@ class HomeActivities:
 
 ![](/_docs/assets/Week2/Rollbar/Rollbar.png)
 
-#### Created and Error and catched in Rollbar
+#### Created an Error and catched in Rollbar
 
 ![](/_docs/assets/Week2/Rollbar/Rollbar-Error.png)
 
