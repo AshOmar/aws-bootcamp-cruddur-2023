@@ -151,3 +151,14 @@ class HomeActivities:
 ![](/_docs/assets/Week2/CloudWatch/CloudWatch-Logs.png)
 
 ### Integrate Rollbar and capture an error
+
+#### Created new project named Cruddur and Instruments some data (Info, Warrning & Errors)
+
+![](/_docs/assets/Week2/Rollbar/Rollbar.png)
+
+#### Created and Error and catched in Rollbar
+
+![](/_docs/assets/Week2/Rollbar/Rollbar-Error.png)
+
+
+
