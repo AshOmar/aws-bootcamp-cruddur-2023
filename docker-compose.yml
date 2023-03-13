@@ -51,7 +51,6 @@ services:
       REACT_APP_AWS_USER_POOLS_ID: "ca-central-1_fkmdgoun5"
       REACT_APP_CLIENT_ID: "ih0q5j30au953t4kh1jcvbjqs"
       REACT_APP_IDENTITY_POOL_ID: "ca-central-1_fkmdgoun5"
-      REACT_APP_AWS_USER_POOLS_WEB_CLIENT_ID: "ih0q5j30au953t4kh1jcvbjqs"
     build: ./frontend-react-js
     ports:
       - "3000:3000"
