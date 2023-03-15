@@ -12,7 +12,7 @@ class HomeActivities:
   #CloudWatch ---------
   ###def run(logger): #CloudWatch getting logger parameter in run function
   # -------------------
-  def run():
+  def run(cognito_user_id=None):
     #CloudWatch -----------------------------
     ###logger.info("Home.Activities")
     # ---------------------------------------
@@ -64,6 +64,17 @@ class HomeActivities:
         'replies': []
       }
       ]
+      if cognito_user_id != None:
+        extra_crud = {
+          'uuid': '248959df-3079-4947-b847-9e0892d1bab4',
+          'handle':  'AshrafOmar',
+          'message': 'Authenticated User logged in',
+          'created_at': (now - timedelta(hours=1)).isoformat(),
+          'expires_at': (now + timedelta(hours=12)).isoformat(),
+          'likes': 1042,
+          'replies': []
+        }
+        results.insert(0,extra_crud)
       #HoneyComb ------------------------------------------
       span.set_attribute("app.result.length",len(results))
       #----------------------------------------------------

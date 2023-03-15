@@ -17,3 +17,5 @@ watchtower
 #Rollbar
 blinker
 rollbar
+
+Flask-AWSCognito
