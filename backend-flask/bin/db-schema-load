@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+
+echo "db-schema-load"
+echo $(realpath ..)
+schema_path=$(realpath ..)/db/schema.sql
+echo $schema_path
+echo Running from $(realpath "$0")
+psql $CONNECTION_URL cruddur < $schema_path
+#NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+#echo $NODBURL
+#psql $NODBURL -c "CREATE DATABASE cruddur;"

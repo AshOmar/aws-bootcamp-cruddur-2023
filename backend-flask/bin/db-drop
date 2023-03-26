@@ -1,0 +1,7 @@
+#! /usr/bin/bash
+
+echo "db-drop"
+
+NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+echo $NODBURL
+psql $NODBURL -c "DROP DATABASE cruddur;"

@@ -1,0 +1,7 @@
+#! /usr/bin/bash
+
+echo "db-create"
+
+NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
+echo $NODBURL
+psql $NODBURL -c "CREATE DATABASE cruddur;"
