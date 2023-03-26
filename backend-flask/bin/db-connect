@@ -1,0 +1,16 @@
+#! /usr/bin/bash
+
+BRED='\033[1;31m'
+NC='\033[0m' # No Color
+
+echo -e "\n${BRED}=== DB Connect Start ===${NC}\n"
+
+if [ "$1" == "prod" ]; then
+    URL=$PROD_CONNECTION_URL
+else
+    URL=$CONNECTION_URL
+fi
+
+psql $URL
+
+echo -e "\n${BRED}=== DB Connect Finish ===${NC}\n"

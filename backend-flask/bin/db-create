@@ -1,7 +1,15 @@
 #! /usr/bin/bash
 
-echo "db-create"
+BRED='\033[1;31m'
+NC='\033[0m' # No Color
+Label="=== DB Create Start ==="
+#echo -e "\n${RED}${Label}${NC}\n"
+#printf "${RED}${Label}${NC}\n"
+echo -e "\n${BRED}=== DB Create Start ===${NC}\n"
 
-NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
-echo $NODBURL
+URL=$CONNECTION_URL
+NODBURL=$(sed 's/\/cruddur//g' <<<"$URL")
+
 psql $NODBURL -c "CREATE DATABASE cruddur;"
+
+echo -e "\n${BRED}=== DB Create Finish ===${NC}\n"

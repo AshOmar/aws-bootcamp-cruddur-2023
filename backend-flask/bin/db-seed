@@ -3,7 +3,7 @@
 BRED='\033[1;31m'
 NC='\033[0m' # No Color
 
-echo -e "\n${BRED}=== DB Schema Load Start ===${NC}\n"
+echo -e "\n${BRED}=== DB Seed Start ===${NC}\n"
 
 if [ "$1" == "prod" ]; then
     URL=$PROD_CONNECTION_URL
@@ -12,9 +12,9 @@ else
 fi
 
 #echo $(realpath ..)
-schema_path=$(realpath ..)/db/schema.sql
+seed_path=$(realpath ..)/db/seed.sql
 #echo $schema_path
 #echo Running from $(realpath "$0")
-psql $URL cruddur < $schema_path
+psql $URL cruddur < $seed_path
 
-echo -e "\n${BRED}=== DB Schema Load Finish ===${NC}\n"
+echo -e "\n${BRED}=== DB Seed Finish ===${NC}\n"

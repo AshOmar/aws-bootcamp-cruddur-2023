@@ -1,7 +1,10 @@
 #! /usr/bin/bash
+BRED='\033[1;31m'
+NC='\033[0m' # No Color
 
-echo "db-drop"
+echo -e "\n${BRED}=== DB Drop Start ===${NC}\n"
 
 NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
-echo $NODBURL
 psql $NODBURL -c "DROP DATABASE cruddur;"
+
+echo -e "\n${BRED}=== DB Drop Finish ===${NC}\n"
