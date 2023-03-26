@@ -1,0 +1,25 @@
+
+#! /usr/bin/bash
+
+BRED='\033[1;31m'
+NC='\033[0m' # No Color
+
+echo -e "\n${BRED}=== DB Sessions Start ===${NC}\n"
+
+if [ "$1" == "prod" ]; then
+    URL=$PROD_CONNECTION_URL
+else
+    URL=$CONNECTION_URL
+fi
+
+NODBURL=$(sed 's/\/cruddur//g' <<<"$URL")
+
+psql $URL -c "select pid as process_id, \
+       usename as user,  \
+       datname as db, \
+       client_addr, \
+       application_name as app,\
+       state \
+from pg_stat_activity;"
+
+echo -e "\n${BRED}=== DB Sessions Finish ===${NC}\n"
