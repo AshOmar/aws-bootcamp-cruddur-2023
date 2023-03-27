@@ -1,0 +1,16 @@
+#! /usr/bin/bash
+set -e 
+
+BRED='\033[1;31m'
+NC='\033[0m' # No Color
+
+echo -e "\n${BRED}=== DB Setup Start ===${NC}\n"
+
+bin_path=$(realpath ..)/bin
+
+source "$bin_path/db-drop"
+source "$bin_path/db-create"
+source "$bin_path/db-schema-load"
+source "$bin_path/db-seed"
+
+echo -e "\n${BRED}=== DB Setup Finish ===${NC}\n"
