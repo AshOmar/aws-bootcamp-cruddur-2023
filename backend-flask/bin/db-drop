@@ -1,27 +1,21 @@
 #! /usr/bin/bash
-set -e 
-
+set +e
 BRED='\033[1;31m'
 NC='\033[0m' # No Color
-
+exitstatus=0
 echo -e "\n${BRED}=== DB Drop Start ===${NC}\n"
-
-DBAlreadyCreatedERR="ERROR: database \"cruddur\" does not exist"
+successError="does not exist"
 NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
-echo $DBAlreadyCreatedERR
-if [ "$(psql $NODBURL -c "DROP DATABASE cruddur;")" == "DBAlreadyCreatedERR" ];then
- echo "Error"
-else
- echo "NoError"
+result=$(psql $NODBURL -c "DROP DATABASE cruddur;" 2>&1  )
+exitstatus=$?
+
+if [ $exitstatus -ne 0 ]; then
+ if [[ "$result" == *"$successError"* ]];then
+  exitstatus=0
+ fi
 fi
-
-status=$?
-
-echo $status
-echo "$@"
-echo $errorMSG
-#if [ "errorMSG" == "ERROR:  database """cruddur""" does not exist" ]; then
-# return 0
-#fi
-
+echo $result
 echo -e "\n${BRED}=== DB Drop Finish ===${NC}\n"
+set -e
+
+exit $exitstatus

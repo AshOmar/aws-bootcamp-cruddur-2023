@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-#set -e 
+set -e
 
 BRED='\033[1;31m'
 NC='\033[0m' # No Color
@@ -8,9 +8,32 @@ echo -e "\n${BRED}=== DB Setup Start ===${NC}\n"
 
 bin_path=$(realpath ..)/bin
 
-source "$bin_path/db-drop"
+/usr/bin/bash "$bin_path/db-drop" 
 source "$bin_path/db-create"
 source "$bin_path/db-schema-load"
 source "$bin_path/db-seed"
+
+
+
+<<Note
+
+# https://stackoverflow.com/questions/8352851/shell-how-to-call-one-shell-script-from-another-shell-script
+There are a couple of different ways you can do this:
+
+Make the other script executable with chmod a+x /path/to/file(Nathan Lilienthal's comment), add the #!/bin/bash line (called shebang) at the top, and the path where the file is to the $PATH environment variable. Then you can call it as a normal command;
+
+Or call it with the source command (which is an alias for .), like this:
+
+source /path/to/script
+Or use the bash command to execute it, like:
+
+/bin/bash /path/to/script
+The first and third approaches execute the script as another process, so variables and functions in the other script will not be accessible.
+The second approach executes the script in the first script's process, and pulls in variables and functions from the other script (so they are usable from the calling script).
+
+In the second method, if you are using exit in second script, it will exit the first script as well. Which will not happen in first and third methods.
+
+'
+Note
 
 echo -e "\n${BRED}=== DB Setup Finish ===${NC}\n"
