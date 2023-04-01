@@ -1,3 +1,4 @@
+# Flask
 flask
 flask-cors
 
@@ -14,8 +15,13 @@ aws-xray-sdk
 # CloudWatch Packages
 watchtower
 
-#Rollbar
+# Rollbar
 blinker
 rollbar
 
+# Flask AWS Conginto
 Flask-AWSCognito
+
+# Postgres Driver
+psycopg[binary]
+psycopg[pool]
