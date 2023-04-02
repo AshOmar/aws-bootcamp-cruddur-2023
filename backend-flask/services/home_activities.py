@@ -95,7 +95,11 @@ class HomeActivities:
             LEFT JOIN public.users ON users.uuid = activities.user_uuid
             ORDER BY activities.created_at DESC
             """)
+            
       print(sql)
+
+      span.set_attribute("app.result.length",len(sql))
+
       with pool.connection() as conn:
         with conn.cursor() as cur:
           cur.execute(sql)
@@ -105,6 +109,6 @@ class HomeActivities:
       return json[0]
 
       #HoneyComb ------------------------------------------
-      span.set_attribute("app.result.length",len(results))
+      
       #----------------------------------------------------
-      return results
+      ###return results

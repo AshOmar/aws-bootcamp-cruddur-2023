@@ -162,7 +162,7 @@ def data_home():
   #CloudWatch --------------------------------
   # Passing logger to HomeActivities 
   ###data = HomeActivities.run(logger = LOGGER)
-  data = HomeActivities.run()
+  #data = HomeActivities.run()
   # -------------------------------------------
   access_token = extract_access_token(request.headers)
   try:
