@@ -78,7 +78,6 @@ class HomeActivities:
       ########    'replies': []
       ########  }
       ########  results.insert(0,extra_crud)
-
       sql = f"""
             SELECT
               activities.uuid,
@@ -95,10 +94,9 @@ class HomeActivities:
             LEFT JOIN public.users ON users.uuid = activities.user_uuid
             ORDER BY activities.created_at DESC
             """  
-      
       span.set_attribute("app.result.length",len(sql))
 
-      results = db.query_array_json(sql)
+      results = db.query_array_json("Home Activities",sql)
       return results
 
       #HoneyComb ------------------------------------------
