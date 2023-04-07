@@ -1,6 +1,7 @@
 from psycopg_pool import ConnectionPool
 import os
-
+import re
+from flask import current_app as app
 class textColours:
   # Reset
   Color_Off='\033[0m'       # Text Reset
@@ -83,30 +84,65 @@ class DB:
   def init_pool(self):
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
+  
+  def template(self,*args):
 
-  def query_object_json(self,title,sql):
+    pathing = list((app.root_path,'db','sql',) + args)
+    pathing[-1] = pathing[-1] + ".sql"
+
+    template_path = os.path.join(*pathing)
+
+    print(f'{textColours().BIGreen} Load SQL Template: {template_path}{textColours().Color_Off}')
+
+    with open(template_path, 'r') as f:
+      template_content = f.read()
+    return template_content
+
+  def query_commit(self,sql,params={}):
+    
+    pattern = r"\bRETURNING\b"
+    is_returning = re.search(pattern, sql)
+
+    try:
+      with self.pool.connection() as conn:
+        cur =  conn.cursor()
+        cur.execute(sql,params)
+        if is_returning:
+          returning_param = cur.fetchone()[0]
+        conn.commit() 
+        if is_returning:
+          return returning_param
+    except Exception as err:
+      self.print_sql_err(err)
+
+
+  def query_object_json(self,title,sql,params={}):
     wrapped_sql = self.query_wrap_object(sql)
-    self.print_sql(title, sql)
+    self.print_sql(title, wrapped_sql)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
-        cur.execute(sql)
-        # this will return a tuple
-        # the first field being the data
-        json = cur.fetchone()
-    return json[0]
-  def query_array_json(self,title,sql):
-    wrapped_sql = self.query_wrap_array(sql)
-    self.print_sql(title,sql)
-    with self.pool.connection() as conn:
-      with conn.cursor() as cur:
-        cur.execute(sql)
+        cur.execute(wrapped_sql,params)
         # this will return a tuple
         # the first field being the data
         json = cur.fetchone()
     if json is None:
-      return []
+      return "{}"
     else:
       return json[0]
+  def query_array_json(self,title,sql,params={}):
+    wrapped_sql = self.query_wrap_array(sql)
+    self.print_sql(title,wrapped_sql)
+    with self.pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(wrapped_sql,params)
+        # this will return a tuple
+        # the first field being the data
+        json = cur.fetchone()
+    if json is None:
+      return "[]"
+
+    else:
+      return json[0]   
   def query_wrap_object(self,sql):
     wrapped_sql = f"""
     (SELECT COALESCE(row_to_json(object_row),'{{}}'::json) FROM (

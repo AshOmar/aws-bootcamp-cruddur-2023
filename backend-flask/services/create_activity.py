@@ -1,12 +1,14 @@
 import uuid
 from datetime import datetime, timedelta, timezone
+from lib.db import db
 class CreateActivity:
   def run(message, user_handle, ttl):
     model = {
       'errors': None,
       'data': None
     }
-
+    print("user handle =====" + user_handle)
+    
     now = datetime.now(timezone.utc).astimezone()
 
     if (ttl == '30-days'):
@@ -40,12 +42,29 @@ class CreateActivity:
         'message': message
       }   
     else:
-      model['data'] = {
-        'uuid': uuid.uuid4(),
-        'display_name': 'Andrew Brown',
-        'handle':  user_handle,
-        'message': message,
-        'created_at': now.isoformat(),
-        'expires_at': (now + ttl_offset).isoformat()
-      }
+      expires_at = (now + ttl_offset)
+
+      #####model['data'] = {
+      #####  'uuid': uuid.uuid4(),
+      #####  'display_name': 'Andrew Brown',
+      #####  'handle':  user_handle,
+      #####  'message': message,
+      #####  'created_at': now.isoformat(),
+      #####  'expires_at': (now + ttl_offset).isoformat()
+      #####}
+
+      print("userHandle =====" + user_handle)
+
+      create_activity_sql = db.template('activities','create')
+      uuid = db.query_commit(create_activity_sql,{
+      'handle': user_handle,
+      'message': message,
+      'expires_at': expires_at
+    })
+      
+      query_activity_sql = db.template('activities','object')
+      object_json = db.query_object_json('',query_activity_sql,{
+        'uuid':uuid
+      })
+      model['data'] = object_json
     return model
