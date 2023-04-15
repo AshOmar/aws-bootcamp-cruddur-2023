@@ -87,10 +87,14 @@ class DB:
   
   def template(self,*args):
 
-    pathing = list((app.root_path,'db','sql',) + args)
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    parent_path = os.path.abspath(os.path.join(current_path, '..'))
+
+    pathing = list((parent_path,'db','sql',) + args)
     pathing[-1] = pathing[-1] + ".sql"
 
     template_path = os.path.join(*pathing)
+
 
     print(f'{textColours().BIGreen} Load SQL Template: {template_path}{textColours().Color_Off}')
 

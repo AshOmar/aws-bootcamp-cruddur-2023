@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import boto3
+import os
+import sys
+from datetime import datetime, timedelta, timezone
+import uuid
+
+# get current path of the file
+current_path = os.path.dirname(os.path.abspath(__file__))
+# go back to parent path
+parent_path = os.path.abspath(os.path.join(current_path, '..', '..'))
+# append sys path to include parent path
+sys.path.append(parent_path)
+
+from lib.db import db
+
+attrs = {
+  'endpoint_url': 'http://localhost:8000'
+}
+# unset endpoint url for use with production database
+if len(sys.argv) == 2:
+  if "prod" in sys.argv[1]:
+    attrs = {}
+ddb = boto3.client('dynamodb',**attrs)
+
+def get_user_uuids():
+  sql = db.template("users","uuid")
+  users = db.query_array_json("GET Users",sql,{
+    'my_handle':  'andrewbrown',
+    'other_handle': 'bayko'
+  })
+  my_user    = next((item for item in users if item["handle"] == 'andrewbrown'), None)
+  other_user = next((item for item in users if item["handle"] == 'bayko'), None)
+  results = {
+    'my_user': my_user,
+    'other_user': other_user
+  }
+  return results
+
+conversation_path = os.path.join(current_path,'conversation')
+with open(conversation_path, 'r') as f:
+  conversation = f.read()
+
+lines = conversation.lstrip('\n').rstrip('\n').split('\n')
+
+for line in lines:
+  if line.startswith('Person 1:'):
+    key = 'my_user'
+    message = line.replace('Person 1: ', '')
+  elif line.startswith('Person 2: '):
+    key = 'other_user'
+    message = line.replace('Person 2: ', '')
+  else:
+    print(line)
+    raise 'invalid line'
+
+#get_user_uuids()
