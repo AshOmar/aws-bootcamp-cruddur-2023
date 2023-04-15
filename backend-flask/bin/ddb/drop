@@ -1,0 +1,19 @@
+#! /usr/bin/bash 
+set -e
+
+if [ -z "$1" ]; then
+ echo "Please enter Table Name e.g ./bin/ddb/drop cruddur-messages"
+ exit 1
+fi
+echo $1
+
+TableName=$1
+
+if [ "$2" = "PROD" ]; then
+ ENDPOINT_URL=""
+else
+ ENDPOINT_URL="--endpoint-url=http://localhost:8000"
+fi
+
+aws dynamodb delete-table $ENDPOINT_URL \
+    --table-name $TableName

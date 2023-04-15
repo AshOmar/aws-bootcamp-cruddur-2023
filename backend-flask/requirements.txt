@@ -25,3 +25,6 @@ Flask-AWSCognito
 # Postgres Driver
 psycopg[binary]
 psycopg[pool]
+
+# AWS SDK for Python
+boto3

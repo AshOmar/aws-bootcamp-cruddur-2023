@@ -8,10 +8,10 @@ echo -e "\n${BRED}=== DB Setup Start ===${NC}\n"
 
 bin_path=$(realpath ..)/bin
 
-/usr/bin/bash "$bin_path/db-drop" 
-source "$bin_path/db-create"
-source "$bin_path/db-schema-load"
-source "$bin_path/db-seed"
+/usr/bin/bash "$bin_path/db/drop" 
+source "$bin_path/db/create"
+source "$bin_path/db/schema-load"
+source "$bin_path/db/seed"
 
 
 
