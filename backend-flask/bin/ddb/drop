@@ -1,6 +1,8 @@
 #! /usr/bin/bash 
 set -e
 
+# ./bin/ddb/drop cruddur-messages
+
 if [ -z "$1" ]; then
  echo "Please enter Table Name e.g ./bin/ddb/drop cruddur-messages"
  exit 1

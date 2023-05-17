@@ -21,6 +21,7 @@ attrs = {
 if len(sys.argv) == 2:
   if "prod" in sys.argv[1]:
     attrs = {}
+    
 ddb = boto3.client('dynamodb',**attrs)
 
 def get_user_uuids():
@@ -29,12 +30,17 @@ def get_user_uuids():
     'my_handle':  'andrewbrown',
     'other_handle': 'bayko'
   })
+
+
+  print ("users", users)
   my_user    = next((item for item in users if item["handle"] == 'andrewbrown'), None)
   other_user = next((item for item in users if item["handle"] == 'bayko'), None)
   results = {
     'my_user': my_user,
     'other_user': other_user
   }
+  print ("Resutls ==========")
+  print (results)
   return results
 
 conversation_path = os.path.join(current_path,'conversation')
@@ -54,4 +60,4 @@ for line in lines:
     print(line)
     raise 'invalid line'
 
-#get_user_uuids()
+get_user_uuids()
