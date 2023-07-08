@@ -119,10 +119,17 @@ class DB:
     except Exception as err:
       self.print_sql_err(err)
 
+  def query_value(self,title,sql,params={}):
+    self.print_sql(title,sql,params)
+    with self.pool.connection() as conn:
+      with conn.cursor() as cur:
+        cur.execute(sql,params)
+        json = cur.fetchone()
+        return json[0]
 
   def query_object_json(self,title,sql,params={}):
     wrapped_sql = self.query_wrap_object(sql)
-    self.print_sql(title, wrapped_sql)
+    self.print_sql(title, wrapped_sql,params)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(wrapped_sql,params)
@@ -133,9 +140,10 @@ class DB:
       return "{}"
     else:
       return json[0]
+  
   def query_array_json(self,title,sql,params={}):
     wrapped_sql = self.query_wrap_array(sql)
-    self.print_sql(title,wrapped_sql)
+    self.print_sql(title,wrapped_sql,params)
     with self.pool.connection() as conn:
       with conn.cursor() as cur:
         cur.execute(wrapped_sql,params)
@@ -147,6 +155,7 @@ class DB:
 
     else:
       return json[0]   
+  
   def query_wrap_object(self,sql):
     wrapped_sql = f"""
     (SELECT COALESCE(row_to_json(object_row),'{{}}'::json) FROM (
@@ -169,9 +178,12 @@ class DB:
       print(key, ":", value)
     print(f'======{title}======{textColours().Color_Off}')
 
-  def print_sql(self,title,sql):
+  def print_sql(self,title,sql,params={}):
     print(f'{textColours().Purple}======SQL STATEMENT-[{title}]======')
     print(f'{sql}')
+  
+    print(f'Params {params}')
+  
     print(f'======SQL STATEMENT-[{title}]======\n{textColours().Color_Off}')
 
   def print_sql_err(self,err):
