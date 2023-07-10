@@ -6,7 +6,7 @@ exitstatus=0
 echo -e "\n${BRED}=== DB Drop Start ===${NC}\n"
 successError="does not exist"
 NODBURL=$(sed 's/\/cruddur//g' <<<"$CONNECTION_URL")
-result=$(psql $NODBURL -c "DROP DATABASE cruddur;" 2>&1  )
+result=$(psql $NODBURL -c "DROP DATABASE IF EXISTS cruddur;" 2>&1  )
 exitstatus=$?
 
 if [ $exitstatus -ne 0 ]; then
