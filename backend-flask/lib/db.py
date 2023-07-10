@@ -102,8 +102,8 @@ class DB:
       template_content = f.read()
     return template_content
 
-  def query_commit(self,sql,params={}):
-    
+  def query_commit(self,title,sql,params={}):
+    self.print_sql(title,sql,params)
     pattern = r"\bRETURNING\b"
     is_returning = re.search(pattern, sql)
 
