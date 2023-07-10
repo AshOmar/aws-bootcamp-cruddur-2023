@@ -23,6 +23,10 @@ tasks:
       cd frontend-react-js
       npm i
       npm i aws-amplify --save
+  - name: flask
+    command: |
+      cd backend-flask
+      pip install -r requirements.txt
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
