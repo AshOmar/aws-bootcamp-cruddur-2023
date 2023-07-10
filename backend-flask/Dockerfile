@@ -21,6 +21,7 @@ COPY . .
 # set Environment Variables (Env Vars).
 # Inside Container.
 ENV FLASK_ENV=development
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE ${PORT}
 # python3 -m flask run --host=0.0.0.0 --port=4567
