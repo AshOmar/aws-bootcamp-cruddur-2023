@@ -23,7 +23,7 @@ ddb = boto3.client('dynamodb',**attrs)
 table_name = 'cruddur-messages'
 
 def get_my_user_uuid():
-  sql = db.template("users","my-uuid")
+  sql = db.template("users","uuid_from_handle")
   uuid = db.query_value('get my uuid',sql,{
     'handle':  'andrewbrown'
   })
