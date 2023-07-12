@@ -24,8 +24,8 @@ class Ddb:
       'ScanIndexForward': False,
       'Limit': 20,
       'ExpressionAttributeValues': {
-        ':year': {'S': str(current_year) },
-        ':pk': {'S': f"GRP#{my_user_uuid}"}
+        ':pk': {'S': f"GRP#{my_user_uuid}"},
+        ':year': {'S': str(current_year) }
       }
     }
     print('query-params')
@@ -46,5 +46,42 @@ class Ddb:
         'handle': item['user_handle']['S'],
         'message': item['message']['S'],
         'created_at': last_sent_at
+      })
+    return results
+
+  def list_messages(client,message_group_uuid):
+    current_year = datetime.now().year
+    table_name = 'cruddur-messages'
+    query_params = {
+      'TableName': table_name,
+      'KeyConditionExpression': 'pk = :pkey AND begins_with(sk,:year)',
+      'ScanIndexForward': False,
+      'Limit': 20,
+      'ExpressionAttributeValues': {
+        ':pkey': {'S': f"MSG#{message_group_uuid}"},
+        ':year': {'S': str(current_year) }
+      }
+    }
+    
+    print('query-params')
+    print(query_params)
+    print('client')
+    print(client)
+
+    response = client.query(**query_params)
+    items = response['Items']
+    print(items)
+    items.reverse()
+    print("items after reverse",items)
+
+    results = []
+    for item in items:
+      created_at = item['sk']['S']
+      results.append({
+        'uuid': item['message_uuid']['S'],
+        'display_name': item['user_display_name']['S'],
+        'handle': item['user_handle']['S'],
+        'message': item['message']['S'],
+        'created_at': created_at
       })
     return results
