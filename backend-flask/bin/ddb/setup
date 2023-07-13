@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+
+import subprocess
+
+# Run the other script
+subprocess.run(["python", "./ddb/schema-load"])
+subprocess.run(["python", "./ddb/seed"])
