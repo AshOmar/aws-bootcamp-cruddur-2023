@@ -13,6 +13,7 @@ from services.messages import *
 from services.create_message import *
 from services.show_activity import *
 from services.notifications_activities import *
+from services.users_short import *
 
 from lib.cognito_jwt_token import extract_access_token,CognitoJwtToken,TokenVerifyError
 
@@ -144,6 +145,11 @@ def data_message_groups():
     #data = HomeActivities.run()
     return {}, 401
 
+@app.route("/api/users/@<string:handle>/short", methods=['GET'])
+def data_users_short(handle):
+  data = UsersShort.run(handle)
+  return data, 200
+  
 @app.route("/api/messages/<string:message_group_uuid>", methods=['GET'])
 def data_messages(message_group_uuid):
   access_token = extract_access_token(request.headers)
