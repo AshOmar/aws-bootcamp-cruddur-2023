@@ -11,6 +11,8 @@ class CreateMessage:
       'data': None
     }
 
+    print("====mode=====",mode)
+    print("====user_receiver_handle=====", user_receiver_handle)
     if (mode == "update"):
       if message_group_uuid == None or len(message_group_uuid) < 1:
         model['errors'] = ['message_group_uuid_blank']
@@ -29,6 +31,7 @@ class CreateMessage:
 
     if model['errors']:
       # return what we provided
+      print("=====mode error=======")
       model['data'] = {
         'display_name': 'Andrew Brown',
         'handle':  user_sender_handle,

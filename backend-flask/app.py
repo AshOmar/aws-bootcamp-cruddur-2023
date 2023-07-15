@@ -142,7 +142,6 @@ def data_message_groups():
     # unauthenicatied request
     app.logger.debug(e)
     app.logger.debug("unauthenicated")
-    #data = HomeActivities.run()
     return {}, 401
 
 @app.route("/api/users/@<string:handle>/short", methods=['GET'])
@@ -175,7 +174,7 @@ def data_messages(message_group_uuid):
 @cross_origin()
 def data_create_message():
   message = request.json['message']
-  message_group_uuid   = request.json.get('message_group_uuid',None),
+  message_group_uuid   = request.json.get('message_group_uuid',None)
   user_receiver_handle = request.json.get('handle',None)
 
   access_token = extract_access_token(request.headers)
